@@ -5,7 +5,10 @@ FoodSight is an end-to-end Deep Learning application that identifies 101 differe
 🔗 **Live Demo:** [https://foodsight-track.streamlit.app]
 
 ## 📌 Problem Statement
-The **Food-101** dataset is a challenging Computer Vision benchmark. It contains 101,000 images across 101 food categories. The main challenge is that many food classes are visually identical (e.g., `steak` vs. `filet_mignon`, or `chocolate_mousse` vs. `chocolate_cake`). Furthermore, identifying the food is only half the problem; users want to know the nutritional value of their meal.
+
+The **Food-101** dataset is a challenging Computer Vision benchmark containing 101,000 images across 101 food categories. The primary challenge is visual ambiguity—many food classes look nearly identical (e.g., `steak` vs. `filet_mignon`, or `chocolate_mousse` vs. `chocolate_cake`). Furthermore, identifying the food name is only half the solution; **users ultimately want to know the calorie content of their meal**.
+
+Because the model is trained strictly on these 101 classes, it operates in a closed environment. Foods outside this dataset (e.g., *Rendang* or *Nasi Goreng*) will **not** be recognized correctly, and the model will forcefully predict the closest visual match. **To address this limitation**, I implemented a **Human-in-the-Loop (HITL)** feedback system. If a user inputs an unsupported food, the application rejects the calorie calculation but automatically saves the image into a `retraining_data` folder. This creates a data flywheel, allowing the dataset to expand and the model to be fine-tuned for new, custom foods in the future.
 
 ## 🧠 Model & Approach
 *   **Architecture:** EfficientNet-B3 (pre-trained on ImageNet-1k).
